@@ -1,6 +1,4 @@
 ﻿// 1. Feladat
-using System.Security.Cryptography.X509Certificates;
-
 if (args.Length % 2 == 0 || args.Length <= 2)
 {
     Console.WriteLine("Nem megfelelő argumentumszám!");
@@ -47,6 +45,34 @@ Console.WriteLine($"A több, mint négy szótagból álló stavak száma: {negyS
 Console.WriteLine($"A legnagyo szótagszám: {legnagyobbSzotag}");
 
 // 3. Feladat
+int[,] matrix = new int[6,6];
+for (int i = 0; i < 6; i++)
+{
+    for (int j = 0; j < 6; j++)
+    {
+        Random rnd = new();
+        matrix[i,j] = rnd.Next(55,155);
+    }
+}
+List<int> atlagolando = new();
+for (int i = 0; i < 6; i++)
+{
+    for (int j = 0; j < 6; j++)
+    {
+        Console.Write(matrix[i, j] + "\t");
+        if (i == 0 || i == 5)
+        {
+            atlagolando.Add(matrix[i,j]);
+        }
+        if (j == 0 && i != 0 && i!=5 || j == 5 && i != 0 && i != 5)
+        {
+            atlagolando.Add(matrix[i, j]);
+        }
+    }
+    Console.WriteLine();
+}
+Console.WriteLine($"A szélső elemek átlaga: {atlagolando.Sum()/atlagolando.Count}");
+
 
 
 //4. Feladat
@@ -70,3 +96,4 @@ foreach (var kod in kodok)
     }
 }
 File.WriteAllLines("kekitett.txt", kekitett);
+Console.WriteLine("#Kész!");
