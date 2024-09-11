@@ -1,7 +1,7 @@
 ﻿// 1. Feladat
 using System.Security.Cryptography.X509Certificates;
 
-if (args.Length%2 == 0 || args.Length <= 2)
+if (args.Length % 2 == 0 || args.Length <= 2)
 {
     Console.WriteLine("Nem megfelelő argumentumszám!");
 }
@@ -11,7 +11,7 @@ else
     {
         Console.WriteLine($"Eredmény: {Math.Pow(Convert.ToInt32(args[args.Length / 2]), Convert.ToInt32(args[(args.Length / 2) + 1]) / Convert.ToInt32(args[(args.Length / 2) - 1]))}");
     }
-    else 
+    else
     {
         Console.WriteLine($"Eredmény: {Math.Pow(Convert.ToInt32(args[args.Length / 2]), Convert.ToInt32(args[(args.Length / 2) - 1]) / Convert.ToInt32(args[(args.Length / 2) + 1]))}");
     }
@@ -38,7 +38,7 @@ foreach (var szo in szavak)
     {
         negySzotagnalTobbSzavak++;
     }
-    if (legnagyobbSzotag<szotag)
+    if (legnagyobbSzotag < szotag)
     {
         legnagyobbSzotag = szotag;
     }
@@ -47,3 +47,26 @@ Console.WriteLine($"A több, mint négy szótagból álló stavak száma: {negyS
 Console.WriteLine($"A legnagyo szótagszám: {legnagyobbSzotag}");
 
 // 3. Feladat
+
+
+//4. Feladat
+List<string> kodok = File.ReadAllLines("kep.txt").ToList();
+List<string> kekitett = new();
+foreach (var kod in kodok)
+{
+    List<int> szamok = new List<int>();
+    var felbontott = kod.Split(';');
+    if (felbontott.Length != 0)
+    {
+        foreach (var item in felbontott)
+        {
+            szamok.Add(Convert.ToInt32(item));
+        }
+        if (szamok[2] < 100)
+        {
+            szamok[2] += 20;
+        }
+        kekitett.Add(string.Join(";", szamok.ToArray()));
+    }
+}
+File.WriteAllLines("kekitett.txt", kekitett);
